@@ -1,3 +1,32 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'https://github.com/tpope/vim-commentary' " Easily comment/uncomment code
+Plugin 'https://github.com/tpope/vim-endwise'    " Automatically inserts `end` for you. Convenient, works well, stays out of the way otherwise
+Plugin 'https://github.com/tpope/vim-fugitive'   " Git integration... I should learn this better
+Plugin 'https://github.com/bling/vim-airline'    " Status bar at the bottom of the screen
+Plugin 'https://github.com/tpope/vim-repeat'     " Uhm, a dep of something, it lets you repeat non-atomic instructions with the dot. Unfortunately, too minimal, so not easy for me to use (I wish it would take over vim's shitty macro system)
+Plugin 'https://github.com/tpope/vim-surround'   " Better support for working with things that 'surround' text such as quotes and parens
+Plugin 'https://github.com/scrooloose/nerdtree'  " Adds a sidebar to the vim worklflow. Making it easier to move around.
+
+" Language Support
+Plugin 'https://github.com/vim-ruby/vim-ruby'    " Ruby    - Pretty fkn legit (eg it's generally $LOAD_PATH aware, it's got some really awesome text objects)
+Plugin 'https://github.com/dag/vim-fish'         " Fish     - alternate shell
+
+" Themes
+Plugin 'https://github.com/w0ng/vim-hybrid'
+Plugin 'https://github.com/Valloric/vim-valloric-colorscheme'
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 "" ===== Smallest reasonable configuration =====
 set nocompatible                " Behave more usefully at the expense of backwards compatibility (this line comes first b/c it alters how the others work)
 set encoding=utf-8              " Format of the text in our files (prob not necessary, but should prevent weird errors)
@@ -26,10 +55,12 @@ set nowrap          " Display long lines as truncated instead of wrapped onto th
 set cursorline      " Colour the line the cursor is on
 set number          " Show line numbers
 set hlsearch        " Highlight search matches
+colorscheme valloric
 
 "" Basic behaviour =====
 set scrolloff=4     " adds top/bottom buffer between cursor and window
 set incsearch       " Incremental searching
+set clipboard=unnamed
 
 "" ===== Mappings and keybindings. Note that <Leader> is the backslash by default. =====
 " You can change it, though, as seen here: https://github.com/bling/minivimrc/blob/43d099cc351424c345da0224da83c73b75bce931/vimrc#L20-L21
@@ -38,12 +69,13 @@ cmap %% <C-R>=expand("%")<CR>;                            " Replace %% with curr
 vnoremap . :norm.<CR>;                                    " In visual mode, "." will for each line, go into normal mode and execute the "."
 nnoremap <Leader>v :set paste<CR>"*p<CR>:set nopaste<CR>; " Paste without being stupid ("*p means to paste on next line (p) from the register (") that represents the clipboard (*))
 nmap <Leader>p orequire "pry"<CR>binding.pry<ESC>;        " Pry insertion
+nmap <C-n> :NERDTreeToggle<CR>
 
 "" ===== Seeing Is Believing =====
 " Assumes you have a Ruby with SiB available in the PATH
-nmap <leader>b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR>
-nmap <leader>n :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style<CR>
-nmap <leader>c :%!seeing_is_believing --clean<CR>
+nmap <leader>b :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR>;
+nmap <leader>n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style<CR>;
+nmap <leader>c :%.!seeing_is_believing --clean<CR>;
 nmap <leader>m A # => <Esc>
 vmap <leader>m :norm A # => <Esc>
 
@@ -150,3 +182,7 @@ au BufNewFile,BufRead Appraisals		                call s:setf('ruby')
 au BufNewFile,BufRead Podfile,*.podspec		          call s:setf('ruby')
 au BufNewFile,BufRead [rR]outefile		              call s:setf('ruby')
 au BufNewFile,BufRead .simplecov		                call s:setf('ruby')
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>

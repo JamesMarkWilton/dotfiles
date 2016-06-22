@@ -22,9 +22,9 @@ function fish_prompt
 
   # the prompt depends on the last status
   if [ $last_status = 0 ]
-    echo -n \n"🐠 "
+    echo -n \n"😁 "
   else
-    echo -n \n"🍣 " # sushi
+    echo -n \n"😡 " # sushi
     # other option: 🎣
   end
   set_color --background normal

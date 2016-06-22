@@ -1,6 +1,6 @@
 #!/bin/sh
 
-macvim="/Applications/MacVim.app/Contents/MacOS/Vim" # get it with `brew install macvim && brew linkapps`
+macvim="/usr/local/Cellar/macvim/7.4-95/MacVim.app/Contents/MacOS/Vim" # get it with `brew install macvim && brew linkapps`
 systemvim="/usr/bin/vim"
 selectedvim=""
 

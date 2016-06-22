@@ -1,7 +1,7 @@
 [user]
-  name             = YOUR NAME (ie Josh Cheek)
-  email            = YOUR EMAIL (ie me@gmail.com)
-  username         = YOUR GITHUB USERNAME (ie JoshCheek)
+	name = JamesMarkWilton
+	email = james.mark.wilton@gmail.com
+  username         = JamesMarkWilton
 [color]
   ui               = true
 [color "diff"]
